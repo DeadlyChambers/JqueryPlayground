@@ -1,0 +1,116 @@
+<html>
+<head>
+    <style>
+
+        body {
+            background: #20262E;
+            padding: 20px;
+            font-family: Helvetica;
+            margin-top: 75px;
+        }
+
+        button {
+            background: #0084ff;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 14px;
+            font-size: 15px;
+            color: #fff;
+        }
+
+        #player-table {
+            color: white;
+            background-color: lightgray;
+            outline: white;
+        }
+
+            #player-table tr, #player-table th {
+                background-color: black;
+            }
+
+        .document-link {
+            color: orange;
+        }
+
+            .document-link : hover {
+                color: blue;
+            }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 1px solid #e7e7e7;
+            background-color: #f3f3f3;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            /* margin-bottom: 40px; */
+        }
+
+        li {
+            float: left;
+            border-right: 1px solid #bbb;
+            display: inline;
+        }
+
+            li a {
+                display: block;
+                color: #666;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                background-color: #dddddd;
+            }
+
+                /* Change the link color to #111 (black) on hover */
+                li a:hover {
+                    background-color: #111;
+                }
+
+        .active {
+            background-color: #4CAF50;
+        }
+
+
+        li:last-child {
+            border-right: none;
+        }
+    </style>
+    <link rel="stylesheet" href="./navBar.css">
+</head>
+<body>
+    <!-- Nav Bar -->
+    <ul>
+        <li><a href="AddContent.html">Add Content</a></li>
+        <li><a href="TraverserPage.html">Traverser</a></li>
+        <li><a href="PluginPage.html">Plugin</a></li>
+    </ul>
+
+    <!-- Core -->
+    <div id="input-container">
+        <input id="name" type="text" />
+        <input id="number" type="number" />
+        <button id="add-button" class="button">
+            Add
+        </button>
+    </div>
+    <table id="player-table">
+        <tr>
+            <th>Name</th>
+            <th>Number</th>
+        </tr>
+        <tr class="row">
+            <td class="cell">Case Keenum</td>
+            <td class="cell">4</td>
+        </tr>
+    </table>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
+    <script src="./AddContent.js"></script>
+</body>
+</html>
