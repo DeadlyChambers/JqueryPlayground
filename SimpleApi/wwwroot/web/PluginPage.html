@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background: #20262E;
+            padding: 20px;
+            font-family: Helvetica;
+            margin-top: 75px;
+        }
+
+        label {
+            color: white;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+        }
+
+
+
+        button {
+            background: #0084ff;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 14px;
+            font-size: 15px;
+            color: white;
+        }
+
+        #player-table {
+            color: white;
+            background-color: lightgray;
+            outline: white;
+        }
+
+            #player-table tr, #player-table th {
+                background-color: black;
+            }
+
+        .document-link {
+            color: orange;
+        }
+
+            .document-link : hover {
+                color: blue;
+            }
+
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 1px solid #e7e7e7;
+            background-color: #f3f3f3;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            /* margin-bottom: 40px; */
+        }
+
+        li {
+            float: left;
+            border-right: 1px solid #bbb;
+            display: inline;
+        }
+
+            li a {
+                display: block;
+                color: #666;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                background-color: #dddddd;
+            }
+
+                /* Change the link color to #111 (black) on hover */
+                li a:hover {
+                    background-color: #111;
+                }
+
+        .active {
+            background-color: #4CAF50;
+        }
+
+
+        li:last-child {
+            border-right: none;
+        }
+        code {
+            background-color: antiquewhite;
+            margin: 10px;
+        }
+    </style>
+    <link rel="stylesheet" href="./navBar.css">
+</head>
+<body>
+    <!-- Nav Bar -->
+    <ul>
+        <li><a href="AddContent.html">Add Content</a></li>
+        <li><a href="TraverserPage.html">Traverser</a></li>
+        <li><a href="PluginPage.html">Plugin</a></li>
+        <li><a href="ImageGrabPage.html">Image Grab</a></li>
+    </ul>
+
+    <!-- Core -->
+    <a class="document-link" href='https://learn.jquery.com/plugins/basic-plugin-creation/'>Basics of Jquery Plugin</a>
+    <div id="plugin-anchor">
+        Nothing here
+    </div>
+
+    <code>
+        (function ($) {</br>
+        // Extending jquery to setup a new plugin</br>
+        // calling jquery</br>
+        $.fn.setupPlayers = function (options) {</br>
+        </br></br>
+        // Extend our default options with those provided.</br>
+        // Note that the first argument to extend is an empty</br>
+        // object – this is to keep from overriding our "defaults" object.</br>
+        var opts = $.extend({}, $.fn.setupPlayers.defaults, options);</br>
+        </br></br>
+        var $container = $(setupContainer(opts));</br>
+        $container.append(setupPlayerTable());</br>
+        $(this).after($container);</br>
+        </br></br>
+        // setting up the add button's click event</br>
+        $("#add-button").on("click", function () {</br>
+        // find elements</br>
+        var $table = $("#player-table")</br>
+        var $nameInput = $("#name")</br>
+        var $numberInput = $("#number")</br>
+        var row = createRow($nameInput.val(), $numberInput.val());</br>
+        $table.append(row);</br>
+        });</br>
+        </br>
+        $(this).remove();</br>
+        return $container;</br>
+        }</br>
+        </br>
+        // Plugin defaults – added as a property on our plugin function.</br>
+        $.fn.setupPlayers.defaults = {</br>
+        buttonText: "Add"</br>
+        };</br>
+        </br></br>
+        // dynamically add a row, this could be coming from an api call, or some javascript</br>
+        function createRow(name, number) {</br>
+        var temp =</br>
+        `&lt;tr class="row"&gt;&lt;td class="cell"&gt;${name}&lt;/td&gt;&lt;td class="cell"&gt;${number}&lt;/td&gt;&lt;/tr&gt;`;
+        </br>
+        return temp;</br>
+        }</br>
+        </br></br>
+        // The container that will have all of the inputs, and buttons</br>
+        function setupContainer(options) {</br>
+        var buttonText = options.buttonText;</br>
+        return `&lt;div id="input-container"&gt;&lt;input id="name" type="text" /&gt;&lt;input id="number" type="number" /&gt;&lt;button id="add-button" class="button"&gt;${buttonText}&lt;/button&gt;&lt;/div&gt;`;</br>
+        }</br>
+        // This is the player table already loaded with a player and number</br>
+        function setupPlayerTable() {</br>
+        return `&lt;table id="player-table"&gt; </br>
+            &lt;tr&gt;
+                &lt;th&gt;Name&lt;/th&gt;
+                &lt;th&gt;Number&lt;/th&gt;
+            &lt;/tr&gt;
+            &lt;tr class="row"&gt;
+                &lt;td class="cell"&gt;Case Keenum&lt;/td&gt;
+                &lt;td class="cell"&gt;4&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/table&gt;`;
+        }</br>
+        }(jQuery));</br>
+        </br>
+        $(function () {</br>
+        // Uncomment the append to show how the return from the jquery plugin's extension method</br>
+        // returns a jquery object that you can chain off of.</br>
+        $("#plugin-anchor").setupPlayers({ buttonText: 'Add Player' })</br>
+        //.append("&lt;h1&gt;hello world&lt;/h1&gt;");</br>
+        </br>
+        });</br>
+    </code>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
+    <script src="./PluginPage.js"></script>
+</body>
+</html>

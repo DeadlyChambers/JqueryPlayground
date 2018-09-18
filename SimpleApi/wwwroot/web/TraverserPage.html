@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background: #20262E;
+  padding: 20px;
+  font-family: Helvetica;
+      margin-top: 75px;
+
+}
+
+label{
+  color: white;
+}
+
+textarea{
+  width:100%;
+  height:100px;
+}
+
+
+
+button {
+  background: blue;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 14px;
+  font-size: 15px;
+  color: #fff;
+}
+
+#player-table{
+  color:white;
+  background-color:lightgray;
+  outline:white;
+  
+}
+
+#player-table tr, #player-table th{
+  background-color: black;
+  
+}
+
+.document-link{
+	color:orange;
+}
+
+.document-link : hover{
+	color:blue;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    background-color: #f3f3f3;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    /* margin-bottom: 40px; */
+}
+
+li {
+    float: left;
+	border-right: 1px solid #bbb;
+	display:inline;
+}
+
+li a {
+    display: block;
+    color: #666;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+   background-color: #dddddd;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+
+
+li:last-child {
+    border-right: none;
+}
+
+    code {
+        background-color: antiquewhite;
+        margin: 10px;
+    }
+
+</style>
+<link rel="stylesheet" href="./navBar.css">
+</head>
+<body>
+    <!-- Nav Bar -->
+    <ul>
+        <li><a href="AddContent.html">Add Content</a></li>
+        <li><a href="TraverserPage.html">Traverser</a></li>
+        <li><a href="PluginPage.html">Plugin</a></li>
+        <li><a href="ImageGrabPage.html">Image Grab</a></li>
+    </ul>
+
+
+    <!-- Core -->
+    <div id="input-container">
+        <input id="name" type="text" value="The NAME" />
+        <input id="number" type="number" value="10" />
+        <button id="add-button" class="button">
+            Add
+        </button>
+    </div>
+    <table id="player-table">
+        <tr>
+            <th>Name</th>
+            <th>Number</th>
+        </tr>
+        <tr class="row">
+            <td id='keenum-cell' class="cell">Case Keenum</td>
+            <td class="cell">4</td>
+        </tr>
+        <tr class="row">
+            <td data-cell-name='name' id='manning-cell' class="cell">Peyton Manning</td>
+            <td data-cell-name='number' id='number-cell' class="cell">18</td>
+        </tr>
+        <tr class="row">
+            <td id='miller-cell' class="cell">Von Miller</td>
+            <td class="cell">58</td>
+        </tr>
+        <tr class="row">
+            <td class="cell">Bradley Chubb</td>
+            <td class="cell">55</td>
+        </tr>
+    </table>
+
+
+    <div id="double-container">
+        <label>Name</label>
+        <input id="name" value="Random Name" />
+        <button id="output-name-button">
+            Create alert with name
+        </button>
+    </div>
+
+
+
+<textarea id="output-text"></textarea>
+
+    <button id="bronco-button" class="button">
+        Go Broncos
+    </button>
+
+    <code>
+        /*</br>
+        In this example you will still have the adding functionality, just with more rows in the</br>
+        table. There will be multiple dom traversing examples, and some oops code.</br>
+        */</br>
+        </br></br>
+        // find elements</br>
+        var $table = $("#player-table")</br>
+        var $nameInput = $("#name")</br>
+        var $numberInput = $("#number")</br>
+        var $outputText = $("#output-text")</br>
+        </br></br>
+        // 1. Grab element by Id and add a click event, that calls a method to dynamically add a row</br>
+        // from inputs</br>
+        // TODO: Swap to button and show the issue with too broad of a selector</br>
+        // handle click event for the 'Add' Button</br>
+        $("#add-button").on("click", function () {</br>
+        var row = createRow($nameInput.val(), $numberInput.val());</br>
+        $table.append(row);</br>
+        });</br>
+        </br></br>
+        // 2. Click the button for display popup, but grabbing by id when there are 2</br>
+        // of the same id.</br>
+        // TODO: Uncomment the line to properly populate $name</br>
+        // handle click event for the 'Create alert with name'</br>
+        $("#output-name-button").on("click", function () {</br>
+        // get the name input, there are two, so this will grab the first, not the second</br>
+        var $name = $("#name");</br>
+        </br></br>
+        // how to fix by narrowing your dom traversal</br>
+        // $name = $("#name", $(this).parent())</br>
+        </br></br>
+        var length = $name.length; // although there are 2, this will only show 1</br>
+        var name = $name.val();</br>
+        alert(`The name is '${name}', and the number of names is '${length}'`);</br>
+        });</br>
+        </br></br>
+        function traverser() {</br>
+        </br>
+        // 1. Gather all tds, and display count</br>
+        var $tds = $('td');</br>
+        appendToTextArea(`1. Total tds '${$tds.length}'`);</br>
+        </br>
+        // 2. Get the sibling next to the manning-cell</br>
+        var $manningNumberCell = $("#manning-cell").next('td');</br>
+        var number = $manningNumberCell.html();</br>
+        var name = $('#number-cell').data('cell')</br>
+        appendToTextArea(`2. Mannings number ${name} is '${number}'`);</br>
+        </br>
+        }</br>
+        </br>
+        // in order to 'append' text to a text area element, I need to get the text in it,</br>
+        // and append the new value to the textarea</br>
+        function appendToTextArea(text) {</br>
+        $outputText.val($outputText.val() + text + "\n");</br>
+        }</br>
+        </br>
+        // dynamically add a row, this could be coming from an api call, or some javascript</br>
+        function createRow(name, number) {</br>
+        var temp =</br>
+        `&lt;tr class="row"&gt;&lt;td class="cell"&gt;${name}&lt;/td&gt;&lt;td class="cell"&gt;${number}&lt;/td&gt;&lt;/tr&gt;`;</br>
+        return temp;</br>
+        </br>
+        }</br>
+        </br>
+        // 4. a very simple jquery plugin. Pretty much just an extensionn method that will update the</br>
+        // button's background from orange, to blue</br>
+        $.fn.broncoify = function () {</br>
+        var $that = $(this);</br>
+        $(this).on("click", function (e) {</br>
+        var $that = $(this);</br>
+        if ($that.css("background-color") === 'rgb(0, 0, 255)')</br>
+        $that.css("background-color", "orange");</br>
+        else</br>
+        $that.css("background-color", "blue");</br>
+        })</br>
+        };</br>
+        </br>
+        // OnDocumentReady, and see the usage of the jquery plugin</br>
+        $(function () {</br>
+        traverser();</br>
+        $("#bronco-button").broncoify();</br>
+        });</br>
+    </code>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
+    <script src="./TraverserPage.js"></script>
+</body>
+</html>

@@ -78,6 +78,10 @@
         li:last-child {
             border-right: none;
         }
+        code {
+            background-color: antiquewhite;
+            margin: 10px;
+        }
     </style>
     <link rel="stylesheet" href="./navBar.css">
 </head>
@@ -108,6 +112,27 @@
             <td class="cell">4</td>
         </tr>
     </table>
+
+    <code>
+
+        // find elements</br>
+        var $table = $("#player-table")</br>
+        var $nameInput = $("#name")</br>
+        var $numberInput = $("#number")</br>
+        </br></br>
+        // dynamically add a row, this could be coming from an api call, or some javascript</br>
+        function createRow(name, number) {</br>
+        var temp =
+        `&lt;tr class="row"&gt;&lt;td class="cell"&gt;${name}&lt;/td&gt;&lt;td class="cell"&gt;${number}&lt;/td&gt;&lt;/tr&gt;`;</br>
+        return temp;</br>
+        }</br>
+        // handle click event</br>
+        $("button").on("click", function () {</br>
+        var row = createRow($nameInput.val(), $numberInput.val());</br>
+        $table.append(row);</br>
+        });</br>
+
+    </code>
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.js"

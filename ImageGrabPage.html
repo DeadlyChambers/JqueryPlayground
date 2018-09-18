@@ -1,8 +1,7 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <style>
-
         body {
             background: #20262E;
             padding: 20px;
@@ -10,8 +9,19 @@
             margin-top: 75px;
         }
 
+        label {
+            color: white;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+        }
+
+
+
         button {
-            background: #0084ff;
+            background: blue;
             border: none;
             border-radius: 5px;
             padding: 8px 14px;
@@ -90,29 +100,22 @@
         <li><a href="ImageGrabPage.html">Image Grab</a></li>
     </ul>
 
-    <!-- Core -->
-    <div id="input-container">
-        <input id="name" type="text" />
-        <input id="number" type="number" />
-        <button id="add-button" class="button">
-            Add
-        </button>
+    <input id="website-url" type="text" />
+    <button id="grab-image-button" class="button">
+        Get Image
+    </button>
+    <a href="http://localhost:54487/api/elements/cats/1">
+        http://localhost:54487/api/elements/cats/1
+    </a>
+
+    <div id="image-container">
+
     </div>
-    <table id="player-table">
-        <tr>
-            <th>Name</th>
-            <th>Number</th>
-        </tr>
-        <tr class="row">
-            <td class="cell">Case Keenum</td>
-            <td class="cell">4</td>
-        </tr>
-    </table>
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.js"
             integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
             crossorigin="anonymous"></script>
-    <script src="./AddContent.js"></script>
+    <script src="./ImageGrabPage.js"></script>
 </body>
 </html>
